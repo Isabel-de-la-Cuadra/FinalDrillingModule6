@@ -20,6 +20,7 @@ const fs = require('fs');
 const port = 3000;
 
 // Read anime data from the JSON file
+// Read anime data from the JSON file
 let animeData = []; // Create an empty array to store the anime data.
 
 /* Use the fs.readFile() function to read the content of the 'anime.json' file in UTF-8 encoding.
@@ -31,16 +32,25 @@ This function takes three parameters:
 3.2.  data: The data read from the file as a string.
 */
 fs.readFile('anime.json', 'utf8', (err, data) => {
-    // Check if there is no error (err is null or undefined).
-    if (!err) {
+    // Check if there is an error (err is not null or undefined).
+    if (err) {
+        // If there's an error reading the file, log the error and set animeData to an empty array.
+        console.error('Error reading anime data:', err);
+    } else {
         /* If no error occurred, parse the data read from the file using JSON.parse().
         This will convert the JSON-formatted string into a JavaScript array or object.
         In this case, the data should be an array of anime objects in JSON format.
         */
-        animeData = JSON.parse(data);
+        try {
+            animeData = JSON.parse(data);
+            console.log('Anime data loaded successfully.');
+        } catch (parseError) {
+            // If there's an error parsing the JSON data, log the error and set animeData to an empty array.
+            console.error('Error parsing anime data:', parseError);
+        }
     }
-    // If there was an error reading the file, the animeData array will remain empty.
 });
+
 
 // Function to find an anime by its ID. Example: Method: GET URL: http://localhost:3000/animes?id=1 (Replace 1 with the desired ID)
 function findAnimeById(id) {
@@ -152,10 +162,16 @@ function deleteAnime(id) {
         // After deleting the anime, call the saveAnimeData() function to save the updated animeData array to the 'anime.json' file.
         saveAnimeData();
 
-        /* Finally, return the deletedAnime, which is an array containing the deleted anime object.
-        Since we removed only one element, the deletedAnime array will contain one element, and we return that element.
+        /* Create a success message with information about the deleted anime and return it.
+        The message can be an object with a 'success' property containing the success message and a 'deletedAnime' property
+        containing the deleted anime object.
         */
-        return deletedAnime[0];
+        const successMessage = {
+            success: `Anime with ID ${id} has been deleted.`,
+            deletedAnime: deletedAnime[0] // The deletedAnime array contains the deleted anime object.
+        };
+
+        return successMessage;
     } else {
         // If no anime with the given ID was found, return null to indicate that the delete was not successful.
         return null;
