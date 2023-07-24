@@ -22,6 +22,8 @@ Logros del proyecto (se puede visualizar con Postman):
 7. 1 Test para probar la respuesta el servidor que fue creado. Iniciar el Servidor en un terminal (node index.js) y en otro correr el test (npx mocha test/server.test.js)
 8. 4 Test para probar el ingreso de un animme (con información válida y con información faltante) y buscar un anime por ID (con casos extremos: 1 y 9999). En una terminal escribir npx mocha test/functions.test.js
 
+Ubicación en el repositorio de GitHub: https://github.com/Isabel-de-la-Cuadra/FinalDrillingModule6
+
 
 
 
