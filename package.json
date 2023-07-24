@@ -18,12 +18,10 @@
     },
     "homepage": "https://github.com/Isabel-de-la-Cuadra/FinalDrillingModule6#readme",
     "dependencies": {
-        "chai-http": "^4.4.0",
         "fs": "^0.0.1-security"
     },
     "devDependencies": {
         "chai": "^4.3.7",
-        "mocha": "^10.2.0",
-        "supertest": "^6.3.3"
+        "mocha": "^10.2.0"
     }
 }

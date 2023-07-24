@@ -3,16 +3,17 @@ const http = require('http');
 
 const { expect } = chai;
 
-describe('Servidor', () => {
-    it('debería responder a las solicitudes GET con código 200 y tipo de contenido JSON', (done) => {
-        const server = require('../index'); // Asegúrate de ajustar la ruta al archivo index.js según la ubicación de tu test
-
-        // Realizamos la solicitud HTTP al servidor
+describe('Server', () => {
+    it('should respond to GET requests with status code 200 and JSON content type', (done) => {
+        // Make an HTTP GET request to the server (assumes the server is already running)
         http.get('http://localhost:3000/animes', (res) => {
+            // Expect the response status code to be 200
             expect(res.statusCode).to.equal(200);
+
+            // Expect the 'content-type' header to be 'application/json'
             expect(res.headers['content-type']).to.equal('application/json');
 
-            // Importante llamar a done() para indicar que el test ha terminado
+            // Important: Call done() to indicate that the test has finished
             done();
         });
     });
